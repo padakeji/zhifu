@@ -19,4 +19,7 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/merchant', 'Merchant\DashboardController@index');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/merchant', 'Merchant\DashboardController@index');
+    Route::get('/merchant/apply', 'Merchant\ApplyController@index');
+});
