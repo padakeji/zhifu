@@ -20,6 +20,7 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/merchant', 'Merchant\DashboardController@index');
+    Route::get('/merchant', ['middleware' => ['permission:merchant'], 'uses' => 'Merchant\DashboardController@index']);
+    Route::get('/merchant/pos', 'Merchant\PosController@index')->middleware(['permission:pos']);
     Route::get('/merchant/apply', 'Merchant\ApplyController@index');
 });
