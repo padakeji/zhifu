@@ -6,7 +6,7 @@
  * Time: 22:49
  */
 
-namespace App;
+namespace App\Models;
 
 use Zizaco\Entrust\EntrustPermission;
 

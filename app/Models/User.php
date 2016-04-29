@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
@@ -27,5 +27,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
+    public function merchant()
+    {
+        return $this->hasOne('App\Models\Merchant');
+    }
 
 }
