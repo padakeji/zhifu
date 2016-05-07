@@ -25,4 +25,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/merchant/pos', 'Merchant\PosController@index');
     Route::get('/merchant/apply', 'Merchant\ApplyController@index');
     Route::post('/merchant/apply_submit', 'Merchant\ApplyController@store');
+    Route::get('/admin', ['middleware' => ['ability:root,admin_index_index'], 'uses' => 'Admin\IndexController@index']);
 });

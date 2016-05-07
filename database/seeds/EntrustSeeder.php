@@ -23,14 +23,14 @@ class EntrustSeeder extends Seeder
 
         DB::table("permissions")->delete();
 
-        $permission_merchant = new \App\Permission();
+        $permission_merchant = new \App\Models\Permission();
         $permission_merchant->name = "merchant";
         $permission_merchant->display_name = "merchant index";
         $permission_merchant->description = "Visit merchant index";
         $permission_merchant->save();
 
         DB::table('roles')->delete();
-        $role_root = new \App\Role();
+        $role_root = new \App\Models\Role();
         $role_root->name = "root";
         $role_root->display_name = "root";
         $role_root->description = "User has all privileges";

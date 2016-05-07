@@ -31,16 +31,19 @@ class ApplyController extends Controller
         $merchant = new Merchant();
         $merchant->company = Input::get('company');
 
-        Auth::user()->merchant()->save($merchant);
-
-        if ($merchant->save())
-        {
+        try {
+            if (Auth::user()->merchant()->save($merchant))
+            {
+                return Redirect::to('/home');
+            }
+            else
+            {
+                return Redirect::back()->withInput()->withErrors("保存失败");
+            }
+        } catch (\Exception $e) {
             return Redirect::to('/home');
         }
-        else
-        {
-            return Redirect::back()->withInput()->withErrors("保存失败");
-        }
+
 
     }
 
