@@ -10,6 +10,10 @@
 
 @if (!$merchant->verified)
 
+    <div>
+        <button type="button" class="btn-default">通过审核</button>
+    </div>
+
 @endif
 
 @endsection

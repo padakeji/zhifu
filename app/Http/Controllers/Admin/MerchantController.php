@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Merchant;
+use App\Models\Role;
 
 class MerchantController extends Controller
 {
@@ -25,7 +26,24 @@ class MerchantController extends Controller
     public function show($id) {
 
         $merchant = Merchant::findOrFail($id);
+
         return view('admin.merchant_show', ['merchant' => $merchant]);
+
+    }
+
+    public function verify($id) {
+
+        DB::transaction(function () use($id) {
+            $merchant = Merchant::findOrFail($id);
+
+            $merchant->verified = true;
+
+            $merchant->save();
+
+            $role = Role::where('name', 'merchant')->firstOrFail();
+
+            $merchant->user->roles()->save($role);
+        });
 
     }
 
