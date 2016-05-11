@@ -26,4 +26,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/merchant/apply', 'Merchant\ApplyController@index');
     Route::post('/merchant/apply_submit', 'Merchant\ApplyController@store');
     Route::get('/admin', ['middleware' => ['ability:root,admin_index_index'], 'uses' => 'Admin\IndexController@index']);
+    Route::get('/admin/merchant', ['middleware' => ['ability:root,admin_merchant_index'], 'uses' => 'Admin\MerchantController@index']);
+    Route::get('/admin/merchant/{id}', ['middleware' => ['ability:root,admin_merchant_show'], 'uses' => 'Admin\MerchantController@show']);
 });
