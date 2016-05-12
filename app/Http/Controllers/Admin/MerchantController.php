@@ -43,7 +43,12 @@ class MerchantController extends Controller
             $role = Role::where('name', 'merchant')->firstOrFail();
 
             $merchant->user->roles()->save($role);
+
+            return response()->json(['status' => true, 'err_msg' => '']);
+
         });
+
+        return response()->json(['status' => false, 'err_msg' => '不明原因失败了']);
 
     }
 

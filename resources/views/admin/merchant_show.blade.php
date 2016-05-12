@@ -11,8 +11,26 @@
 @if (!$merchant->verified)
 
     <div>
-        <button type="button" class="btn-default">通过审核</button>
+        <button id="btn_verify" type="button" class="btn-default">通过审核</button>
     </div>
+
+
+    <script type="text/javascript">
+
+        $('#btn_verify').click(function() {
+            $.ajax({
+                type : "PUT",
+                url : "{{ route('merchant_verify', ['id' => $merchant->id]) }}",
+                dataType: "json",
+                success: function(date) {
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+                }
+            });
+        });
+
+    </script>
 
 @endif
 
