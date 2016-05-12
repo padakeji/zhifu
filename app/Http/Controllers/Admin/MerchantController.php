@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Merchant;
 use App\Models\Role;
+use Illuminate\Support\Facades\DB;
 
 class MerchantController extends Controller
 {
@@ -33,22 +34,20 @@ class MerchantController extends Controller
 
     public function verify($id) {
 
-        DB::transaction(function () use($id) {
+        DB::beginTransaction();
+
+        try{
             $merchant = Merchant::findOrFail($id);
-
             $merchant->verified = true;
-
             $merchant->save();
-
             $role = Role::where('name', 'merchant')->firstOrFail();
-
             $merchant->user->roles()->save($role);
-
+            DB::commit();
             return response()->json(['status' => true, 'err_msg' => '']);
-
-        });
-
-        return response()->json(['status' => false, 'err_msg' => '不明原因失败了']);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => false, 'err_msg' => '不明原因失败了']);
+        }
 
     }
 
