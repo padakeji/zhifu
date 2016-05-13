@@ -17,4 +17,5 @@ class DashboardController extends Controller
     {
         return view('merchant.dashboard_index', ['name' => 'atanl']);
     }
+
 }

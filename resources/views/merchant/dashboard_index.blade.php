@@ -2,6 +2,6 @@
 
 @section("content")
     <Div>
-        Hello, world! I'm {{ $name }}.
+        <a href="{{ route('merchant.wechat.index') }}">微信公众账号信息</a>
     </Div>
 @endsection
