@@ -9,13 +9,14 @@
 namespace app\Http\Controllers\Merchant;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class WechatController extends Controller
 {
 
     public function index()
     {
-        $wechatAccount = null;
+        $wechatAccount = Auth::user()->merchant->wechatAccount;
         return view('merchant.wechat_index', ['wechatAccount' => $wechatAccount]);
     }
 

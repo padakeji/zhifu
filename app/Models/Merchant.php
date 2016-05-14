@@ -11,4 +11,9 @@ class Merchant extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    public function wechatAccount()
+    {
+        return $this->hasOne('App\Models\WechatAccount');
+    }
 }
